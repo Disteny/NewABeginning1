@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using NewABeginning.Utilities
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,28 +12,30 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header" ="">
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                @Html.ActionLink("NewABeginning", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class='@Html.IsActive("Home", "Services")'>@Html.ActionLink("Services", "Services", "Home")</li>
+                    <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class='@Html.IsActive("Home", "Contact")'>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="container body-content">
-        @RenderBody()   
+        @RenderBody()
     </div>
     <div class="container panel-footer">
-        <hr />    
+        <hr />
         <footer>
             <p style="text-align:center"> Copyright  &copy;@DateTime.Now.Year - NewABeginning</p>
         </footer>

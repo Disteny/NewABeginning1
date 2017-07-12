@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace NewABeginning.Controllers
@@ -10,6 +11,11 @@ namespace NewABeginning.Controllers
     {
         // GET: Home
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Services()
         {
             return View();
         }
@@ -25,5 +31,17 @@ namespace NewABeginning.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult EmailSubmit(string customerEmail, string customerRequest)
+        {
+            try {
+                WebMail.Send(to: "someone@example.com", subject: "Help request from - " + customerEmail, body: customerRequest);
+                return View();
+            }catch (Exception ex )
+            {
+                 return View();
+            }
+        }       
     }
 }
