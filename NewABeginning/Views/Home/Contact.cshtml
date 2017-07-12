@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Contact</h2>
+
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div id="Content" class="contusDiv">
+    <table style="align-self: center;">
+        <tr>
+            <td>
+                @Html.Label("Have a Question?",
+               new
+               {
+                   style = " font-size:large;color:rebeccapurple; "
+               })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("Contact us",
+               new
+               {
+                   style = "margin-left: auto; margin-right: auto; text-align: center;"
+               })
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="contusDiv">
+    <table style="margin: 0 auto;">
+        <tr>
+            <td>
+                @Html.Label("Name",
+           new { @class = "Label" })
+            </td>
+            <td>
+                @Html.TextBox("FullName", "",
+           new { @class = "NameTextbox" }
+           )
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("Reason",
+           new { @class = "Label" })
+            </td>
+            <td colspan="2">
+                @Html.DropDownList("Reason", new List<SelectListItem>
+           { new SelectListItem {Text ="I am Bored", Value="B1" },
+           new SelectListItem {Text="I want to learn", Value="L1" }
+           }, "Select Reason")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("Email",
+           new { @class = "Label" })
+            </td>
+            <td>
+                @Html.TextArea("EmailAddress", "", 1, 50, null)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("Message",
+           new { @class = "Label" })
+            </td>
+            <td>
+                @Html.TextArea("Message", "", 5, 100, null)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">
+                <input type="submit" value="Submit Request" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
