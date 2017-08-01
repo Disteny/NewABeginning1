@@ -1,87 +1,64 @@
-﻿
+﻿@model  NewABeginning.Models.EmailFormModel
 @{
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>@ViewBag.Title.</h2>
 
-<h2>Contact</h2>
+@using (Html.BeginForm("Contact", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Send your comments.</h4>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FromName)
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromEmail, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FromEmail)
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Subject, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Subject)
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
+        <div class="col-lg-10">
+            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Message)
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Upload, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="file" name="upload" />
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="EmailSubmit" />
+        </div>
+    </div>
+}
 
-
-<link href="~/Content/Site.css" rel="stylesheet" />
-
-<div id="Content" class="contusDiv">
-    <table style="align-self: center;">
-        <tr>
-            <td>
-                @Html.Label("Have a Question?",
-               new
-               {
-                   style = " font-size:large;color:rebeccapurple; "
-               })
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.Label("Contact us",
-               new
-               {
-                   style = "margin-left: auto; margin-right: auto; text-align: center;"
-               })
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="contusDiv">
-    <table style="margin: 0 auto;">
-        <tr>
-            <td>
-                @Html.Label("Name",
-           new { @class = "Label" })
-            </td>
-            <td>
-                @Html.TextBox("FullName", "",
-           new { @class = "NameTextbox" }
-           )
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.Label("Reason",
-           new { @class = "Label" })
-            </td>
-            <td colspan="2">
-                @Html.DropDownList("Reason", new List<SelectListItem>
-           { new SelectListItem {Text ="I am Bored", Value="B1" },
-           new SelectListItem {Text="I want to learn", Value="L1" }
-           }, "Select Reason")
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.Label("Email",
-           new { @class = "Label" })
-            </td>
-            <td>
-                @Html.TextArea("EmailAddress", "", 1, 50, null)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.Label("Message",
-           new { @class = "Label" })
-            </td>
-            <td>
-                @Html.TextArea("Message", "", 5, 100, null)
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td align="right">
-                <input type="submit" value="EmailSubmit" />
-            </td>
-        </tr>
-    </table>
-</div>
-
-
-
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
