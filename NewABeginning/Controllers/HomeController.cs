@@ -56,7 +56,41 @@ namespace NewABeginning.Controllers
                 using (var smtp = new SmtpClient())
                 {
                     await smtp.SendMailAsync(message);
-                    return RedirectToAction("Sent");
+                    return RedirectToAction("AutoReply");
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AutoReply (EmailFormModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                
+                var message = new MailMessage();
+                message.To.Add(new MailAddress(model.FromEmail));
+                message.From = new MailAddress("nabin.adhikari1123@gmail.com");
+                message.Subject = "Automatic Reply, Please don't reply to this message";
+                message.Body = string.Format("Thank you! for contacting us. We received your message at " + DateTime.Now +
+                    " and will reply as soon as we can depending on the message we received. Sorry, for the inconvenince." +
+                    " If you need immediate help, don't forget to call us on our direct hotline.");
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "nabin.adhikari1123@gmail.com",  // replace with valid value
+                        Password = "Smile2307@"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
                 }
             }
             return View(model);
